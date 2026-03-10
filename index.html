@@ -672,9 +672,9 @@ select option{background:var(--surface2)}
 
   <div class="sidebar-footer">
     <div class="user-chip" onclick="navigate('settings')" title="Edit profile">
-      <div class="user-avatar" id="sidebarAvatar">LS</div>
+      <div class="user-avatar" id="sidebarAvatar">JD</div>
       <div class="user-info">
-        <div class="user-name" id="sidebarName">Luca Schmidt</div>
+        <div class="user-name" id="sidebarName">John Doe</div>
         <div class="user-role" id="sidebarRole">Student</div>
       </div>
     </div>
@@ -2135,7 +2135,7 @@ function getAssignmentsHTML(){
 }
 
 function getSettingsHTML(){
-  const savedName = localStorage.getItem('gg_displayname') || 'Luca Schmidt';
+  const savedName = localStorage.getItem('gg_displayname') || 'John Doe';
   return `<div class="card" style="animation:fadeup .35s ease">
     <div class="card-title">⚙️ Settings</div>
     <div class="card-sub">Configure your StudySync experience</div>
@@ -4567,24 +4567,7 @@ function showBoxErr(id,msg){const e=document.getElementById(id);if(!e)return;e.t
   pointer-events:auto;
 }
 #dev-credit-bar span a:hover{color:#a78bfa;text-decoration:underline;}
-#dev-watermark{
-  position:fixed;inset:0;pointer-events:none;z-index:1;
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
-}
-#dev-watermark::after{
-  content:"Shervin Shapoury";
-  font-family:'DM Mono',monospace;
-  font-size:clamp(24px,4vw,52px);
-  font-weight:500;
-  letter-spacing:0.15em;
-  color:rgba(56,189,248,0.035);
-  transform:rotate(-30deg);
-  white-space:nowrap;
-  pointer-events:none;
-  user-select:none;
-}
-[data-theme="light"] #dev-watermark::after{color:rgba(37,99,235,0.04);}
+#dev-watermark{display:none;}
 #integrity-lock{
   display:none;
   position:fixed;inset:0;z-index:99999;
@@ -4606,8 +4589,7 @@ function showBoxErr(id,msg){const e=document.getElementById(id);if(!e)return;e.t
 
 <!-- ══ DEVELOPER CREDIT BAR ════════════════════════════════ -->
 <div id="dev-credit-bar">
-  <span id="dev-credit-text">Developed by <strong>Shervin Shapoury • Luca Schmidt</strong>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="mailto:Shervin@shapoury.com">Shervin&#64;shapoury&#46;com</a></span>href="mailto:luca.schmidt.usa@gmail.com">Luca&#64;Schmidt&#46;com</a></span>
-</div>
+    <span id="dev-credit-text">Developed by <strong>Shervin Shapoury</strong>&nbsp;&nbsp;·&nbsp;&nbsp;<strong>Luca Schmidt</strong>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="mailto:Shervin@shapoury.com">Shervin&#64;shapoury&#46;com</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="mailto:luca.schmidt.usa@gmail.com">luca&#46;schmidt&#46;usa&#64;gmail&#46;com</a></span></a></span>
 </div>
 
 <!-- ══ LOCKDOWN SCREEN ══════════════════════════════════════ -->
@@ -4617,8 +4599,8 @@ function showBoxErr(id,msg){const e=document.getElementById(id);if(!e)return;e.t
   <p>Unauthorized modification detected.</p>
   <p>This software requires original developer attribution to function correctly.</p>
   <p>The developer credit has been removed or altered. This is a licensed application.</p>
-  <div class="il-name">Original Developer: Shervin Shapoury</div>
-  <div class="il-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a1f2c9c4d3d7c8cfe1d2c9c0d1ced4d3d88fc2cecc">[email&#160;protected]</a></div>
+  <div class="il-name">Original Developers: Shervin Shapoury &amp; Luca Schmidt</div>
+  <div class="il-email">Shervin&#64;shapoury&#46;com &nbsp;·&nbsp; luca&#46;schmidt&#46;usa&#64;gmail&#46;com</div>
 </div>
 
 <!-- ══ INTEGRITY PROTECTION — DO NOT REMOVE ════════════════ -->
@@ -4627,9 +4609,12 @@ function showBoxErr(id,msg){const e=document.getElementById(id);if(!e)return;e.t
   'use strict';
   var _n = atob('U2hlcnZpbiBTaGFwb3VyeQ==');
   var _e = atob('U2hlcnZpbkBzaGFwb3VyeS5jb20=');
+  var _n2 = atob('THVjYSBTY2htaWR0');
+  var _e2 = atob('bHVjYS5zY2htaWR0LnVzYUBnbWFpbC5jb20=');
   try{
-    console.log('%c✦ Developed by '+_n+' — '+_e+' ✦',
+    console.log('%c✦ Developed by '+_n+' & '+_n2+' ✦',
       'color:#38bdf8;font-size:15px;font-weight:bold;background:#07090f;padding:5px 12px;border-radius:4px');
+    console.log('%c'+_e+' · '+_e2,'color:#a78bfa;font-size:12px;background:#07090f;padding:2px 12px;border-radius:4px');
     console.log('%cUnauthorized redistribution or removal of developer credit violates the software license.',
       'color:#64748b;font-size:11px');
   }catch(e){}
@@ -4655,7 +4640,7 @@ function showBoxErr(id,msg){const e=document.getElementById(id);if(!e)return;e.t
       if(cs.display==='none'||cs.visibility==='hidden'||parseFloat(cs.opacity)<0.01){lockdown();return;}
       var content=(txt.innerText||txt.textContent||'');
       if(content.indexOf(_n)===-1){lockdown();return;}
-      if((txt.innerHTML||'').indexOf(_e)===-1){lockdown();return;}
+      if(content.indexOf(_n2)===-1){lockdown();return;}
     }catch(err){
       if(err.message&&err.message.indexOf('integrity')!==-1) throw err;
     }
@@ -4684,3 +4669,17 @@ function showBoxErr(id,msg){const e=document.getElementById(id);if(!e)return;e.t
     obs.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['style','class','hidden'],characterData:true});
   }
   function in
+  function init(){
+    check();
+    startObserver();
+    setInterval(check, 700);
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>
